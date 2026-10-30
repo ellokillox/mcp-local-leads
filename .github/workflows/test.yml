@@ -1,0 +1,30 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # Prueba 1: servidor + cliente JSON-RPC propio contra un mock de Places (sin red, sin clave).
+      - name: Protocol and tool tests (mock Places)
+        run: python tests/test_mcp_local_leads.py
+
+      # Prueba 2: el cliente OFICIAL del SDK de MCP, el mismo camino que Claude Desktop.
+      - name: Official MCP SDK client
+        run: |
+          python -m pip install --quiet "mcp>=1.0"
+          python tests/test_mcp_sdk_client.py
