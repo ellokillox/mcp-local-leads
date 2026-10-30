@@ -1,5 +1,9 @@
 # mcp-local-leads
 
+[![tests](https://github.com/ellokillox/mcp-local-leads/actions/workflows/test.yml/badge.svg)](https://github.com/ellokillox/mcp-local-leads/actions/workflows/test.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+![deps](https://img.shields.io/badge/dependencies-none-brightgreen)
+
 An MCP server (Model Context Protocol) that finds **local businesses that appear on Google Maps but have no website** — the most obvious prospect list there is if you sell websites, SEO or marketing to local businesses.
 
 Ask Claude Desktop / Claude Code / Cursor / any MCP client:
