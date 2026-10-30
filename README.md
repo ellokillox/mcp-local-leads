@@ -45,6 +45,15 @@ GOOGLE_PLACES_API_KEY=your_key python3 server.py
 
 Restart the client and the tools show up.
 
+**Docker (this is also how directory checks build it):**
+
+```bash
+docker build -t mcp-local-leads .
+docker run -i --rm -e GOOGLE_PLACES_API_KEY=your_key mcp-local-leads
+```
+
+`-i` keeps stdin open and there is no `-t`: an MCP stdio server speaks one JSON line per message, and a pseudo-TTY would corrupt it. The image is `python:3.12-slim` plus `server.py` — nothing to install, runs as an unprivileged user.
+
 ## Tools
 
 ### `find_businesses_without_website`
@@ -89,6 +98,18 @@ Writes the `leads` array to a CSV (12 columns, UTF-8 with BOM so Excel opens it 
 
 Both scripts are in this repo's `tests/` folder and run in CI on every push (`.github/workflows/test.yml`, Python 3.9 / 3.12 / 3.13). The SDK interop step needs Python 3.10+, because that is the SDK's own minimum; the server itself does not.
 
+`test_mcp_docker.py` — the same handshake **inside the container**, from the published `Dockerfile` (this is the check directories that build servers run: the image must start and answer introspection):
+
+```
+1) docker build                    OK  imagen construida
+2) arranque sin clave              OK  isError=true y el mensaje nombra GOOGLE_PLACES_API_KEY
+3) initialize / tools/list         OK  serverInfo.name = mcp-local-leads · 2 herramientas
+4) tools/call contra el mock       OK  3 negocios vistos · 2 sin web · ids ['p1','p3']
+                                   OK  field mask 11 campos · clave en X-Goog-Api-Key
+5) export_leads_csv                OK  2 filas escritas dentro del contenedor
+== RESULTADO: TODO OK (16 comprobaciones) ==
+```
+
 ## Limits (read this before you buy a key)
 
 - **Places has no emails.** It returns phone and address; finding a decision-maker's email is a separate step (and a separate problem).
@@ -105,7 +126,7 @@ This server is free and MIT on purpose: MIT means take it and use it.
 
 ## Español
 
-Servidor MCP que encuentra **negocios locales que aparecen en Google Maps pero no tienen sitio web**: la lista de prospectos más obvia que existe si vendes webs, SEO o marketing a negocios locales. Un solo archivo, sin dependencias, Python 3.8+.
+Servidor MCP que encuentra **negocios locales que aparecen en Google Maps pero no tienen sitio web**: la lista de prospectos más obvia que existe si vendes webs, SEO o marketing a negocios locales. Un solo archivo, sin dependencias, Python 3.9+.
 
 Le pides a tu cliente de IA: *«busca clínicas dentales sin web en Temuco y guárdalas en un CSV»* y el modelo llama a este servidor, que consulta **Places API (New)**, pagina, descarta duplicados por `placeId` y devuelve solo los que no tienen `websiteUri`.
 
