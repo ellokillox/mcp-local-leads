@@ -30,3 +30,17 @@ jobs:
         run: |
           python -m pip install --quiet "mcp>=1.0"
           python tests/test_mcp_sdk_client.py
+
+  # Prueba 3: la imagen Docker. Es lo que ejecutan los directorios que construyen
+  # servidores (arrancar y responder a la introspeccion); si el Dockerfile se rompe,
+  # se rompe aqui y no en el directorio.
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Docker build + MCP handshake inside the container
+        run: python tests/test_mcp_docker.py
+
