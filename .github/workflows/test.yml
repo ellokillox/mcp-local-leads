@@ -24,7 +24,9 @@ jobs:
         run: python tests/test_mcp_local_leads.py
 
       # Prueba 2: el cliente OFICIAL del SDK de MCP, el mismo camino que Claude Desktop.
+      # El SDK `mcp` exige Python >= 3.10; en 3.9 el servidor se prueba igual con la prueba 1.
       - name: Official MCP SDK client
+        if: matrix.python-version != '3.9'
         run: |
           python -m pip install --quiet "mcp>=1.0"
           python tests/test_mcp_sdk_client.py
