@@ -8,7 +8,7 @@ Ask Claude Desktop / Claude Code / Cursor / any MCP client:
 
 and the AI calls this server, which queries **Google Places API (New)**, paginates, drops duplicates by `placeId` and returns **only** the businesses whose `websiteUri` is empty.
 
-- **One file, zero dependencies.** Standard library only, Python 3.8+. No `pip install`, no Node, no build step.
+- **One file, zero dependencies.** Standard library only, Python 3.9+ (tested in CI on 3.9, 3.12 and 3.13). No `pip install`, no Node, no build step.
 - **Narrow field mask** (11 fields). Places bills by the fields you request, so asking for less costs less.
 - **Two tools:** `find_businesses_without_website` and `export_leads_csv`.
 - **No scraping, no third-party data brokers.** It reads the field Google already returns.
@@ -83,7 +83,7 @@ Writes the `leads` array to a CSV (12 columns, UTF-8 with BOM so Excel opens it 
 
 `python3 test_mcp_sdk_client.py` — the same server driven by the **official Python MCP SDK** (`stdio_client` + `ClientSession`), i.e. the same code path Claude Desktop uses: `initialize` → `list_tools` → `call_tool` for both tools, 4 leads returned, CSV written.
 
-Both scripts are in this repo's `tests/` folder and run in CI on every push.
+Both scripts are in this repo's `tests/` folder and run in CI on every push (`.github/workflows/test.yml`, Python 3.9 / 3.12 / 3.13). The SDK interop step needs Python 3.10+, because that is the SDK's own minimum; the server itself does not.
 
 ## Limits (read this before you buy a key)
 
