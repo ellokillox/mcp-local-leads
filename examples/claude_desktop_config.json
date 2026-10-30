@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "local-leads": {
+      "command": "python3",
+      "args": ["/ABSOLUTE/PATH/TO/server.py"],
+      "env": {
+        "GOOGLE_PLACES_API_KEY": "YOUR_KEY_HERE"
+      }
+    }
+  }
+}
