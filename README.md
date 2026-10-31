@@ -1,5 +1,7 @@
 # mcp-local-leads
 
+**Docs & live demo:** <https://ellokillox.github.io/> — install, the exact test output and what is not tested.
+
 [![tests](https://github.com/ellokillox/mcp-local-leads/actions/workflows/test.yml/badge.svg)](https://github.com/ellokillox/mcp-local-leads/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![deps](https://img.shields.io/badge/dependencies-none-brightgreen)
