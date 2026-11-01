@@ -21,9 +21,28 @@ and the AI calls this server, which queries **Google Places API (New)**, paginat
 
 ## Install
 
-1. Save `server.py` anywhere, e.g. `~/mcp-local-leads/server.py`.
-2. Get a **Google Places API (New)** key with billing enabled: <https://console.cloud.google.com/google/maps-apis>. Enable *Places API (New)*.
-3. Point your MCP client at it.
+**One command — the published image** (official MCP Registry: `io.github.ellokillox/mcp-local-leads`, image on GHCR for `amd64` and `arm64`):
+
+```bash
+docker run -i --rm -e GOOGLE_PLACES_API_KEY=your_key ghcr.io/ellokillox/mcp-local-leads:1.0.0
+```
+
+…and in a client config:
+
+```json
+{
+  "mcpServers": {
+    "local-leads": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "-e", "GOOGLE_PLACES_API_KEY=your_key",
+               "ghcr.io/ellokillox/mcp-local-leads:1.0.0"]
+    }
+  }
+}
+```
+
+**No Docker — one file.** Save `server.py`, get a **Google Places API (New)** key with
+billing enabled: <https://console.cloud.google.com/google/maps-apis>. Enable *Places API (New)*.
 
 **Claude Desktop** (`claude_desktop_config.json`, macOS `~/Library/Application Support/Claude/`, Windows `%APPDATA%\Claude\`):
 
