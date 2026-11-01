@@ -17,6 +17,19 @@ It exposes two tools:
 
 ## Steps
 
+**Path A — Docker (fastest, no clone).** If `docker` is available, the image is published on GHCR and
+registered in the official MCP Registry as `io.github.ellokillox/mcp-local-leads`:
+
+```bash
+docker run -i --rm -e GOOGLE_PLACES_API_KEY=<the user's key> ghcr.io/ellokillox/mcp-local-leads:1.0.0
+```
+
+In the client config use `"command": "docker"` with args
+`["run","-i","--rm","-e","GOOGLE_PLACES_API_KEY=<key>","ghcr.io/ellokillox/mcp-local-leads:1.0.0"]`.
+Never add `-t` (it corrupts stdio). Skip to step 3 below for the key.
+
+**Path B — clone and run the file.**
+
 1. Clone the repository somewhere stable (not a temporary directory):
 
    ```bash
