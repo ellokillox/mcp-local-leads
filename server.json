@@ -1,0 +1,31 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.ellokillox/mcp-local-leads",
+  "title": "Local Business Lead Finder",
+  "description": "Find local businesses on Google Maps that have no website, then export them to CSV.",
+  "version": "1.0.0",
+  "websiteUrl": "https://b2b.medicpc51.cl/mcp-server/",
+  "repository": {
+    "url": "https://github.com/ellokillox/mcp-local-leads",
+    "source": "github",
+    "id": "1440012683"
+  },
+  "packages": [
+    {
+      "registryType": "oci",
+      "identifier": "ghcr.io/ellokillox/mcp-local-leads:1.0.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "GOOGLE_PLACES_API_KEY",
+          "description": "Google Places API (New) key with billing enabled. Create it at https://console.cloud.google.com/google/maps-apis and enable 'Places API (New)'.",
+          "isRequired": true,
+          "isSecret": true,
+          "format": "string"
+        }
+      ]
+    }
+  ]
+}
