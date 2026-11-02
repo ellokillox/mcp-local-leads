@@ -1,5 +1,7 @@
 # mcp-local-leads
 
+[![ellokillox/mcp-local-leads MCP server](https://glama.ai/mcp/servers/ellokillox/mcp-local-leads/badges/score.svg)](https://glama.ai/mcp/servers/ellokillox/mcp-local-leads)
+
 [![tests](https://github.com/ellokillox/mcp-local-leads/actions/workflows/test.yml/badge.svg)](https://github.com/ellokillox/mcp-local-leads/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![deps](https://img.shields.io/badge/dependencies-none-brightgreen)
